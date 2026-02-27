@@ -1,27 +1,27 @@
 public class PalindromeCheckerApp {
+    /**
+     * Application entry point for UC7.
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
-        // Define the input string to validate
-        String input = "civic";
+        // Define the input string
+        String input = "refer";
 
-        // Create a Queue to store characters in FIFO order using a LinkedList
-        java.util.Queue<Character> queue = new java.util.LinkedList<>();
+        // Create a Deque to store characters using ArrayDeque
+        java.util.Deque<Character> deque = new java.util.ArrayDeque<>();
 
-        // Create a Stack to store characters in LIFO order
-        java.util.Stack<Character> stack = new java.util.Stack<>();
-
-        // Insert each character into both queue and stack
+        // Add each character to the deque
         for (char c : input.toCharArray()) {
-            queue.add(c);  // Enqueue operation
-            stack.push(c); // Push operation
+            deque.addLast(c);
         }
 
-        // Flag to track palindrome status
+        // Flag to track palindrome result
         boolean isPalindrome = true;
 
-        // Compare characters until the queue becomes empty
-        while (!queue.isEmpty()) {
-            // Compare the front of the queue (FIFO) with the top of the stack (LIFO)
-            if (!queue.remove().equals(stack.pop())) {
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
+            // Remove first and last elements and compare them
+            if (!deque.removeFirst().equals(deque.removeLast())) {
                 isPalindrome = false;
                 break;
             }
